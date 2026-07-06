@@ -14,11 +14,19 @@ class Inventory:
     def __init__(self):
         self.products = {}
 
+    def add_product(self, product):
+        self.products[product.name] = product    
+    
+    def list_products(self):
+        return list(self.products.values())
    
    
 
 def main():
     inventory = Inventory()
+    inventory.add_product(Product("Coffee", "Beverage", 5.5, 10))
+    inventory.add_product(Product("Sugar", "Food", 2.0, 20))
+
     
     print("Welcome to Inventory Manager")
     while True:
@@ -35,11 +43,27 @@ def main():
         if choice == '1':
             name = input("Name: ")
             category = input("Category: ")
+
             try:
-                
+                price = float(input("Price: "))
+                quantity = int(input("Quantity: "))
+
+                product = Product(name, category, price, quantity)
+                inventory.add_product(product)
+
+                print("Product added successfully.")
+
             except ValueError:
                 print("Error: Price must be a number and Quantity must be an integer.")
-                
+
+        elif choice == '2':
+            products = inventory.list_products()
+            if not products:
+                print("Inventory is empty.")
+            else:
+                for p in products:
+                    print(p)
+
         elif choice == '6':
             print("Exiting...")
             sys.exit(0)
