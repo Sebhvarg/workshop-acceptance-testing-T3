@@ -14,8 +14,11 @@ class Inventory:
     def __init__(self):
         self.products = {}
 
-   
-   
+    def remove_product(self, name):
+        if name not in self.products:
+            return False, f"Product '{name}' not found."
+        del self.products[name]
+        return True, f"Product '{name}' removed successfully."
 
 def main():
     inventory = Inventory()
@@ -39,6 +42,11 @@ def main():
                 
             except ValueError:
                 print("Error: Price must be a number and Quantity must be an integer.")
+                
+        elif choice == '4':
+            name = input("Product Name: ")
+            success, msg = inventory.remove_product(name)
+            print(msg)
                 
         elif choice == '6':
             print("Exiting...")
