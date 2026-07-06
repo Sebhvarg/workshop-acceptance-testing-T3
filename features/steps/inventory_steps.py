@@ -65,8 +65,3 @@ def step_impl_remove_product(context, product_name):
 def step_impl_should_not_contain(context, product_name):
     # Como self.products ahora es un diccionario, verificamos directamente si la llave existe
     assert product_name not in context.inventory.products, f"Error: '{product_name}' no fue eliminado del inventario."
-
-@then('the output should be "{message}"')
-def step_impl_check_output(context, message):
-    # Comparamos el mensaje esperado con el mensaje exacto que nos devolvió el método
-    assert context.output == message, f"Se esperaba \"{message}\" pero se obtuvo \"{context.output}\""
