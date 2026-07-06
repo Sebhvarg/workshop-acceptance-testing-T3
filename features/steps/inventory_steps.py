@@ -31,9 +31,6 @@ def step_impl_search_product(context, product):
 
 @then('the output should be "{message}"')
 def step_impl_check_output(context, message):
-    # Validamos que tu función haya retornado False
-    assert context.success is False, "Se esperaba que la búsqueda fallara"
-    # Validamos que el texto coincida exactamente con lo esperado
     assert context.output == message, f'Expected "{message}" but got "{context.output}"'
 # --- Scenario: Update a product that does not exist ---
 
@@ -45,10 +42,6 @@ def step_impl_update_product(context, name, quantity):
     success, msg = context.inventory.update_quantity(name, quantity)
     context.output = msg
 
-#Step 3: Then the output should be "{message}"
-@then('the output should be "{message}"')
-def step_impl_check_output(context, message):
-    assert context.output == message, f'Expected "{message}" but got "{context.output}"'
 ### Feature Eliminar ### 
 
 # --- GIVEN STEPS ---

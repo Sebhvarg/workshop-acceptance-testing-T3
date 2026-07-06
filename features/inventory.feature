@@ -1,9 +1,11 @@
 Feature: Inventory Manager System
 
-  Scenario: Add a product to the inventory
-    Given the inventory is empty
-    When the user adds a product "Coffee"
-    Then the inventory should contain "Coffee"
+    Scenario: Add a product to an existing inventory
+    Given the inventory contains products:
+      | Product |
+      | Apple   |
+    When the user adds a product "Banana"
+    Then the inventory should contain "Banana"
 
 
   Scenario: Search for a product that does not exist
