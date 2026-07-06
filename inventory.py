@@ -29,6 +29,11 @@ class Inventory:
             return False, f"Product '{name}' already exists."
         self.products[name] = Product(name, category, price, quantity)
         return True, f"Product '{name}' added successfully."
+    def search_product(self, name):
+        """Feature 5: Search for a specific product by name"""
+        if name not in self.products:
+            return False, f"Product '{name}' not found."
+        return True, self.products[name]
 
    
 
@@ -71,6 +76,12 @@ def main():
             name = input("Product Name: ")
             success, msg = inventory.remove_product(name)
             print(msg)
+
+        elif choice == '5':
+            name = input("Product Name: ")
+            success, result = inventory.search_product(name)
+            if success:
+                print(f"Found: {result}")
                 
         elif choice == '6':
             print("Exiting...")
