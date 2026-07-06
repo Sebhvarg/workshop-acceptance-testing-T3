@@ -1,12 +1,9 @@
-Feature: Inventory Manager
-  
+Feature: Inventory Manager System
+
   Scenario: Add a product to the inventory
     Given the inventory is empty
     When the user adds a product "Coffee"
     Then the inventory should contain "Coffee"
-
-
-Feature: Remove a product from the inventory
 
   Scenario: Remove a product from the inventory
     Given the inventory contains products:
@@ -19,4 +16,4 @@ Feature: Remove a product from the inventory
   Scenario: Remove a product that does not exist
     Given the inventory is empty
     When the user removes the product "Coffee"
-    Then the output should be "Product Coffee was not found"
+    Then the output should be "Product 'Coffee' not found."

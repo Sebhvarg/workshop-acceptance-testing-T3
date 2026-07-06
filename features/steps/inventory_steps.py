@@ -27,16 +27,9 @@ def step_impl_check_contains(context, name):
 @given('the inventory contains products:')
 def step_impl_given_products(context):
     context.inventory = Inventory()
-    
-    # Adaptado para agregar productos a tu diccionario
     for row in context.table:
         product_name = row['Product']
-        # Suponiendo que tu método de agregar recibe estos parámetros
-        context.inventory.add_product(product_name, 5.0, 10, "Groceries")
-
-@given('the inventory is empty')
-def step_impl_empty_inventory(context):
-    context.inventory = Inventory()
+        context.inventory.add_product(product_name, "Groceries", 5.0, 10)
 
 # --- WHEN STEPS ---
 
