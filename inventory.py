@@ -14,6 +14,11 @@ class Inventory:
     def __init__(self):
         self.products = {}
 
+    def update_quantity(self, name, new_quantity):
+        if name not in self.products:
+            return False, f"Product '{name}' not found."
+        self.products[name].quantity = int(new_quantity)
+        return True, f"Quantity of '{name}' updated to {new_quantity}."
     def remove_product(self, name):
         if name not in self.products:
             return False, f"Product '{name}' not found."
@@ -52,6 +57,15 @@ def main():
                 print(msg)
             except ValueError:
                 print("Error: Price must be a number and Quantity must be an integer.")
+        
+        elif choice == '3':
+            name = input("Product Name: ")
+            try:
+                quantity = int(input("New Quantity: "))
+                success, msg = inventory.update_quantity(name, quantity)
+                print(msg)
+            except ValueError:
+                print("Error: Quantity must be an integer.")
                 
         elif choice == '4':
             name = input("Product Name: ")
