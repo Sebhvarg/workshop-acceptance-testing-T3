@@ -38,3 +38,35 @@ def step_impl_update_product(context, name, quantity):
 @then('the output should be "{message}"')
 def step_impl_check_output(context, message):
     assert context.output == message, f'Expected "{message}" but got "{context.output}"'
+### Feature Eliminar ### 
+
+# --- GIVEN STEPS ---
+
+@given('the inventory contains products:')
+def step_impl_given_products(context):
+    context.inventory = Inventory()
+    for row in context.table:
+        product_name = row['Product']
+        context.inventory.add_product(product_name, "Groceries", 5.0, 10)
+
+# --- WHEN STEPS ---
+
+@when('the user removes the product "{product_name}"')
+def step_impl_remove_product(context, product_name):
+    # Desempaquetamos la tupla que devuelve tu nueva lógica (success, msg)
+    success, msg = context.inventory.remove_product(product_name)
+    
+    # Guardamos el mensaje en el contexto para poder validarlo en el "Then"
+    context.output = msg
+
+# --- THEN STEPS ---
+
+@then('the inventory should not contain "{product_name}"')
+def step_impl_should_not_contain(context, product_name):
+    # Como self.products ahora es un diccionario, verificamos directamente si la llave existe
+    assert product_name not in context.inventory.products, f"Error: '{product_name}' no fue eliminado del inventario."
+
+@then('the output should be "{message}"')
+def step_impl_check_output(context, message):
+    # Comparamos el mensaje esperado con el mensaje exacto que nos devolvió el método
+    assert context.output == message, f"Se esperaba \"{message}\" pero se obtuvo \"{context.output}\""
