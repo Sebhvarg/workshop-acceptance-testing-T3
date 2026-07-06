@@ -5,6 +5,11 @@ Feature: Inventory Manager System
     When the user adds a product "Coffee"
     Then the inventory should contain "Coffee"
 
+
+  Scenario: Search for a product that does not exist
+    Given the inventory is empty
+    When the user searches for the product "Mouse"
+    Then the output should be "Product 'Mouse' not found."
   Scenario: Update a product that does not exist
     Given the inventory is empty
     When the user updates product "Tea" to quantity "20"
