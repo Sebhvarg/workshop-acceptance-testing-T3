@@ -14,7 +14,12 @@ class Inventory:
     def __init__(self):
         self.products = {}
 
-   
+    def add_product(self, name, category, price, quantity):
+        if name in self.products:
+            return False, f"Product '{name}' already exists."
+        self.products[name] = Product(name, category, price, quantity)
+        return True, f"Product '{name}' added successfully."
+
    
 
 def main():
@@ -36,7 +41,10 @@ def main():
             name = input("Name: ")
             category = input("Category: ")
             try:
-                
+                price = float(input("Price: "))
+                quantity = int(input("Quantity: "))
+                _, msg = inventory.add_product(name, category, price, quantity)
+                print(msg)
             except ValueError:
                 print("Error: Price must be a number and Quantity must be an integer.")
                 
