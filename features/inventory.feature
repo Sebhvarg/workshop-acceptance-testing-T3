@@ -28,3 +28,14 @@ Feature: Inventory Manager System
     Given the inventory is empty
     When the user removes the product "Coffee"
     Then the output should be "Product 'Coffee' not found."
+
+  Scenario: List all products in the inventory
+    Given the inventory contains products:
+      | Product |
+      | Coffee  |
+      | Sugar   |
+    When the user lists all products
+    Then the output should contain:
+      | Product |
+      | Coffee  |
+      | Sugar   |

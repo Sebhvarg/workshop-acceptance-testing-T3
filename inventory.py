@@ -33,12 +33,18 @@ class Inventory:
         """Feature 5: Search for a specific product by name"""
         if name not in self.products:
             return False, f"Product '{name}' not found."
-        return True, self.products[name]
-
+        return True, self.products[name]  
+    
+    def list_products(self):
+        return list(self.products.values())
+   
    
 
 def main():
     inventory = Inventory()
+    inventory.add_product(Product("Coffee", "Beverage", 5.5, 10))
+    inventory.add_product(Product("Sugar", "Food", 2.0, 20))
+
     
     print("Welcome to Inventory Manager")
     while True:
@@ -55,6 +61,7 @@ def main():
         if choice == '1':
             name = input("Name: ")
             category = input("Category: ")
+
             try:
                 price = float(input("Price: "))
                 quantity = int(input("Quantity: "))
@@ -82,7 +89,17 @@ def main():
             success, result = inventory.search_product(name)
             if success:
                 print(f"Found: {result}")
-                
+            else:
+                print(result)
+
+        elif choice == '2':
+            products = inventory.list_products()
+            if not products:
+                print("Inventory is empty.")
+            else:
+                for p in products:
+                    print(p)
+
         elif choice == '6':
             print("Exiting...")
             sys.exit(0)

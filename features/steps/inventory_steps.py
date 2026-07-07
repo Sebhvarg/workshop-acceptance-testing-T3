@@ -39,7 +39,7 @@ def step_impl_check_output(context, message):
 #Step 2: When the user updates product "{name}" to quantity "{quantity}"
 @when('the user updates product "{name}" to quantity "{quantity}"')
 def step_impl_update_product(context, name, quantity):
-    success, msg = context.inventory.update_quantity(name, quantity)
+    _, msg = context.inventory.update_quantity(name, quantity)
     context.output = msg
 
 ### Feature Eliminar ### 
@@ -58,7 +58,7 @@ def step_impl_given_products(context):
 @when('the user removes the product "{product_name}"')
 def step_impl_remove_product(context, product_name):
     # Desempaquetamos la tupla que devuelve tu nueva lógica (success, msg)
-    success, msg = context.inventory.remove_product(product_name)
+    _, msg = context.inventory.remove_product(product_name)
     
     # Guardamos el mensaje en el contexto para poder validarlo en el "Then"
     context.output = msg
@@ -69,3 +69,15 @@ def step_impl_remove_product(context, product_name):
 def step_impl_should_not_contain(context, product_name):
     # Como self.products ahora es un diccionario, verificamos directamente si la llave existe
     assert product_name not in context.inventory.products, f"Error: '{product_name}' no fue eliminado del inventario."
+
+
+@when('the user lists all products')
+def step_impl(context):
+    context.output = context.inventory.list_products()
+
+@then('the output should contain:')
+def step_impl(context):
+    product_names = [product.name for product in context.output]
+
+    for row in context.table:
+        assert row["Product"] in product_names
