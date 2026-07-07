@@ -42,8 +42,8 @@ class Inventory:
 
 def main():
     inventory = Inventory()
-    inventory.add_product(Product("Coffee", "Beverage", 5.5, 10))
-    inventory.add_product(Product("Sugar", "Food", 2.0, 20))
+    inventory.add_product("Coffee", "Beverage", 5.5, 10)
+    inventory.add_product("Sugar", "Food", 2.0, 20)
 
     
     print("Welcome to Inventory Manager")
